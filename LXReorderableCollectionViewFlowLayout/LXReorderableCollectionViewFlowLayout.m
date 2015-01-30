@@ -126,6 +126,10 @@ static NSString * const kLXCollectionViewKeyPath = @"collectionView";
 }
 
 - (void)dealloc {
+    [self.collectionView removeGestureRecognizer:_longPressGestureRecognizer];
+    [self.collectionView removeGestureRecognizer:_panGestureRecognizer];
+    _longPressGestureRecognizer.delegate = nil;
+    _panGestureRecognizer.delegate = nil;
     [self invalidatesScrollTimer];
     [self removeObserver:self forKeyPath:kLXCollectionViewKeyPath];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
